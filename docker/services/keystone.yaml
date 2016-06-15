@@ -1,0 +1,55 @@
+heat_template_version: 2015-04-30
+
+description: >
+  OpenStack Keystone service configured with Puppet
+
+parameters:
+  DockerNamespace:
+    description: namespace
+    default: 'tripleoupstream'
+    type: string
+  DockerKeystoneImage:
+    description: image
+    default: 'centos-binary-keystone'
+    type: string
+  EndpointMap:
+    default: {}
+    description: Mapping of service endpoint -> protocol. Typically set
+                 via parameter_defaults in the resource registry.
+    type: json
+  AdminToken:
+    description: The keystone auth secret and db password.
+    default: "%{hiera('keystone::admin_token')}"
+    type: string
+    hidden: true
+
+resources:
+
+  KeystonePuppetBase:
+    type: ../../puppet/services/keystone.yaml
+    properties:
+      EndpointMap: {get_param: EndpointMap}
+      AdminToken: {get_param: AdminToken}
+
+outputs:
+  role_data:
+    description: Role data for the Keystone API role.
+    value:
+      config_settings: {get_attr: [KeystonePuppetBase, role_data, config_settings]}
+      step_config: {get_attr: [KeystonePuppetBase, role_data, step_config]}
+      puppet_tags: keystone_config
+      docker_config:
+        keystone:
+          container_step_config: 2
+          image:
+            list_join:
+              - '/'
+              - [ {get_param: DockerNamespace}, {get_param: DockerKeystoneImage} ]
+          net: host
+          privileged: false
+          restart: always
+          volumes:
+            - /run:/run
+            - /var/lib/etc-data/json-config/keystone.json:/var/lib/kolla/config_files/keystone.json
+          environment:
+            - KOLLA_CONFIG_STRATEGY=COPY_ALWAYS
