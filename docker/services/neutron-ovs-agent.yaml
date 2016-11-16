@@ -58,7 +58,6 @@ outputs:
           net: host
           pid: host
           privileged: true
-          user: root
           restart: always
           volumes:
             - /var/lib/etc-data/json-config/neutron-openvswitch-agent.json:/var/lib/kolla/config_files/config.json

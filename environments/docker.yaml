@@ -16,16 +16,16 @@ parameter_defaults:
   NovaImage: atomic-image
   # Defaults to 'tripleoupstream'.  Specify a local docker registry
   # Example: 192.0.2.1:8787/tripleoupstream
-  DockerNamespace: tripleoupstream
+  DockerNamespace: kolla
   # Enable local Docker registry
   DockerNamespaceIsRegistry: false
   DockerAgentImage: heat-docker-agents:mitaka
   # Docker containers
-  DockerNovaComputeImage: centos-binary-nova-compute:mitaka
-  DockerLibvirtImage: centos-binary-nova-libvirt:mitaka
-  DockerOpenvswitchImage: centos-binary-neutron-openvswitch-agent:mitaka
-  DockerOvsVswitchdImage: centos-binary-openvswitch-vswitchd:mitaka
-  DockerOpenvswitchDBImage: centos-binary-openvswitch-db-server:mitaka
+  DockerNovaComputeImage: centos-binary-nova-compute:3.0.1
+  DockerLibvirtImage: centos-binary-nova-libvirt:3.0.1
+  DockerOpenvswitchImage: centos-binary-neutron-openvswitch-agent:3.0.1
+  DockerOvsVswitchdImage: centos-binary-openvswitch-vswitchd:3.0.1
+  DockerOpenvswitchDBImage: centos-binary-openvswitch-db-server:3.0.1
 
   ComputeServices:
     - OS::TripleO::Services::NovaCompute

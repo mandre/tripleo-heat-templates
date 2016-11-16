@@ -31,9 +31,9 @@ services = {
         'neutron',
         file_perms],
     'ovs-vswitchd': [
-        '/usr/sbin/ovs-vswitchd unix:/run/openvswitch/db.sock -vconsole:emer -vsyslog:err -vfile:info --mlockall --log-file=/var/log/openvswitch/ovs-vswitchd.log'],
+        '/usr/sbin/ovs-vswitchd unix:/run/openvswitch/db.sock -vconsole:emer -vsyslog:err -vfile:info --mlockall --log-file=/var/log/kolla/openvswitch/ovs-vswitchd.log'],
     'ovsdb-server': [
-        '/usr/sbin/ovsdb-server /etc/openvswitch/conf.db -vconsole:emer -vsyslog:err -vfile:info --remote=punix:/run/openvswitch/db.sock --log-file=/var/log/openvswitch/ovsdb-server.log']
+        '/usr/sbin/ovsdb-server /etc/openvswitch/conf.db -vconsole:emer -vsyslog:err -vfile:info --remote=punix:/run/openvswitch/db.sock --remote=ptcp:6640:127.0.0.1 --log-file=/var/log/kolla/openvswitch/ovsdb-server.log']
 }
 
 

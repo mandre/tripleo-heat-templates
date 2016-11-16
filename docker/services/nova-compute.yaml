@@ -59,7 +59,9 @@ outputs:
             - /etc/localtime:/etc/localtime:ro
             - /lib/modules:/lib/modules:ro
             - /run:/run
+            - /dev:/dev
             - logs:/var/log/kolla/
+            - /etc/iscsi:/etc/iscsi
             - libvirtd:/var/lib/libvirt
             - nova_compute:/var/lib/nova/
           environment:

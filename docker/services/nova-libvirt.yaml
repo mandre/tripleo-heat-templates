@@ -57,6 +57,7 @@ outputs:
             - /etc/localtime:/etc/localtime:ro
             - /lib/modules:/lib/modules:ro
             - /run:/run
+            - /dev:/dev
             - /sys/fs/cgroup:/sys/fs/cgroup
             - logs:/var/log/kolla/
             - libvirtd:/var/lib/libvirt
